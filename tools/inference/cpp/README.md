@@ -40,6 +40,7 @@ tools/inference/cpp
     ./cube_app/cube-builder -dict_name=test_dict -job_mode=base -last_version=0 -cur_version=0 -depend_version=0 -input_path=./cube_app/cube_model -output_path=${PWD}/cube_app/data -shard_num=1 -only_build=false  
 ```
 此处可能需要用户升级 libcurl(apt-get install libcurl3)
+
 4. 本地配送
 ```
     mv ./cube_app/data/0_0/test_dict_part0/* ./cube_app/data/
