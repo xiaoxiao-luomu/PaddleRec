@@ -82,11 +82,11 @@ namespace rec
 			}
 			std::vector<CubeValue> values;
 			std::vector<uint64_t> keys;
-			//keys.assign(feasigns.begin(), feasigns.end());
+			keys.assign(feasigns.begin(), feasigns.end());
 			if (feasigns.size() > globalKeys.size()) {
 				LOG(ERROR) << "global keys not enough!";
 			}
-			keys.assign(globalKeys.begin(), globalKeys.begin() + feasigns.size());
+			//keys.assign(globalKeys.begin(), globalKeys.begin() + feasigns.size());
 			/*
 			std::ifstream keyFile(FLAGS_keys.c_str());
 			if (!keyFile.is_open()) {
@@ -121,11 +121,12 @@ namespace rec
 			}
 			uint64_t seek_cost = time_diff(seek_start, seek_end);
 			// convert && save cube qurey result
-			paddleRecInfer::xbox_pb_converter::XboxPbDeconverter deconverter;
+			//paddleRecInfer::xbox_pb_converter::XboxPbDeconverter deconverter;
 			for (uint64_t i = 0; i < keys.size(); i++) {
 				if (result.find(keys[i]) != result.end()) {
 					continue;
 				}
+				paddleRecInfer::xbox_pb_converter::XboxPbDeconverter deconverter;
 				deconverter.Deconvert(keys[i], values[i].buff);
 				result[keys[i]].swap(deconverter.mf);
 			}
