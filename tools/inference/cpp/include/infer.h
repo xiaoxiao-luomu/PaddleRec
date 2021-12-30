@@ -84,7 +84,8 @@ public:
     {
         USE_GPU = 0;
         EMBEDDING_SIZE = 9;
-	SLOT_NUMBER = 409;
+	    //SLOT_NUMBER = 409;
+        SLOT_NUMBER = 301;
         place = paddle::PaddlePlace::kCPU;
     }
 
@@ -174,7 +175,7 @@ public:
                 }
             }
             oneSample.clear();
-	    oneSampleFeasign.clear();
+	        oneSampleFeasign.clear();
             if (lineCnt == FLAGS_batchSize) {
                 lineCnt = 0;
                 samples.batchIdx = batchIdx;
