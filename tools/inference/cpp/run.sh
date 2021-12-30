@@ -16,6 +16,7 @@ cd build
 rm -rf *
 
 cmake -DWITH_CUBE=ON .. && make -j 10 verbose=1
+#cmake -DWITH_CUBE=ON -DWITH_CUBE_CONVERT2=ON .. && make -j 10 verbose=1
 #cmake .. && make -j 10
 
 cd ../bin
