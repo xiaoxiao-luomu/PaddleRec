@@ -1,8 +1,8 @@
---trainingFile=../data/demo_10_uint32
---modelFile=../all_model_params/model_params
---varsName=../all_vars2.txt
---withCube=false
---debug=true
+--trainingFile=../data/demo_10_300
+--modelFile=../small_model
+--varsName=../all_vars_small_model.txt
+--withCube=true
+--debug=false
 
 --iterationNum=1
 --cube_batch_size=1

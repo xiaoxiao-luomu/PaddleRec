@@ -15,7 +15,8 @@ mkdir -p build
 cd build
 rm -rf *
 
-cmake .. && make -j 10
+cmake -DWITH_CUBE=ON .. && make -j 10 verbose=1
+#cmake .. && make -j 10
 
 cd ../bin
 #for threadNum in 1
