@@ -34,6 +34,8 @@ tools/inference/cpp
 
 * 请阅读 ref_docs 目录下的文件
 
+* 使用 cube 样例（以绝对路径给出）时，请修改相关文件路径 
+
 <h2>测试用例</h2>
 
 1. 不启用 cube 服务：全量带 embedding 的模型
