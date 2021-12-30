@@ -22,6 +22,21 @@ namespace paddleRecInfer {
 namespace xbox_pb_converter {
     
 void XboxPbDeconverter::Deconvert(uint64_t& key, std::string& value) {
+#ifdef TEST_CUBE_CONVERT
+    float* data_ptr = (float*)malloc(15 * sizeof(float));
+    memset(data_ptr, float(0.0), sizeof(float) * 15);
+    mf.reserve(9);
+    LOG(INFO) << value;
+    memcpy(data_ptr, value.data(), value.size());
+    LOG(INFO) << "key: " << key << ", value: " << data_ptr[0] << "," << data_ptr[1] << "," << data_ptr[2] << "," << data_ptr[3] << "," << data_ptr[4] << "," << data_ptr[5] << "," <<  data_ptr[6] << "," << data_ptr[7] << ", " << data_ptr[8];
+    for (uint i = 0; i < 9; i++) {
+        mf[i] = *(data_ptr + i);
+    }
+    LOG(INFO) << "key: " << key << ", value: "
+    << mf[0] << "," << mf[1] << "," << mf[2] << "," << mf[3] << "," << mf[4] << "," << mf[5] << "," <<  mf[6] << "," << mf[7] << ", " << mf[8];
+    return;
+#endif
+
     Init();
     PaddleRec::infer::MioMFResult mio_pb;
     mio_pb.ParseFromString(value);

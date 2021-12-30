@@ -95,8 +95,8 @@ public:
             config.DisableGlogInfo();
         }
         //config.SetModel(FLAGS_modelFile, FLAGS_paramFile);
-	config.SetModel(FLAGS_modelFile);
-	if(FLAGS_debug) {
+	    config.SetModel(FLAGS_modelFile);
+	    if(FLAGS_debug) {
             config.SwitchIrOptim(static_cast<bool>(false));
         } else {
             config.SwitchIrOptim(static_cast<bool>(true));
@@ -296,17 +296,17 @@ public:
     {
         //LOG(INFO) << "enter FillLodTensorWithEmbdingVec ...";
         queryResult[0] = std::vector<float>(piModel->EMBEDDING_SIZE, 0.0);
-	std::vector<std::vector<size_t>> lod(1, std::vector<size_t>(FLAGS_batchSize + 1));
+	    std::vector<std::vector<size_t>> lod(1, std::vector<size_t>(FLAGS_batchSize + 1));
         uint feasignCnt = 0;
         uint feasignNum = batchSample.feasignIds.size();
-//std::cout << "batch idx: " << batchSample.batchIdx << std::endl;
-std::ofstream fout("../embed_input.txt", std::ios_base::app);
-//fout << "batch idx: " << batchSample.batchIdx << "\n";
-//fout << "slot id: ";       
- for (uint i = 0; i < inputVarNames.size(); i++) {
+        //std::cout << "batch idx: " << batchSample.batchIdx << std::endl;
+        std::ofstream fout("../embed_input.txt", std::ios_base::app);
+        //fout << "batch idx: " << batchSample.batchIdx << "\n";
+        //fout << "slot id: ";       
+        for (uint i = 0; i < inputVarNames.size(); i++) {
             uint32_t slotId = i + 2;
-	    //fout << slotId << "\n";
-		//std::cout << inputVarNames.size() << ", " << inputVarNames[0] << std::endl; 
+            //fout << slotId << "\n";
+            //std::cout << inputVarNames.size() << ", " << inputVarNames[0] << std::endl; 
             paddle_infer::Tensor *lodTensor = GetLodTensorByVarName(inputVarNames[i]); 
             if (lodTensor == nullptr) {
                 continue;
@@ -316,7 +316,7 @@ std::ofstream fout("../embed_input.txt", std::ios_base::app);
             for (int sampleIdx = 0; sampleIdx < FLAGS_batchSize; ++sampleIdx) {
                 int len = batchSample.featureCnts[slotId][sampleIdx];
                 lod0.push_back(lod0.back() + len);
-		width += len;
+		        width += len;
             }
             memcpy(lod[0].data(), lod0.data(), sizeof(size_t) * lod0.size()); // low performance
             lodTensor->SetLoD(lod);
@@ -331,15 +331,15 @@ std::ofstream fout("../embed_input.txt", std::ios_base::app);
                     uint64_t feasign = batchSample.feasigns[slotId][sampleIdx][k];
                     feasignCnt++;
                     TypeIn *data_ptr = lodTensor->mutable_data<TypeIn>(piModel->place) + offset;
-		fout << feasign << ": ";
-                 if (queryResult[feasign].empty()) {
-			LOG(ERROR) << "no result: " << feasign;
-		    }
-		    for (int k = 0; k < queryResult[feasign].size(); k++) {
-                        fout << queryResult[feasign][k] << ", ";
-		    }
-	            fout << ";";
-		    memcpy(data_ptr,
+		            fout << feasign << ": ";
+                    if (queryResult[feasign].empty()) {
+                        LOG(ERROR) << "no result: " << feasign;
+                    }
+                    for (int k = 0; k < queryResult[feasign].size(); k++) {
+                                fout << queryResult[feasign][k] << ", ";
+                    }
+	                fout << ";";
+		            memcpy(data_ptr,
                         queryResult[feasign].data(),
                         sizeof(TypeIn) * queryResult[feasign].size());
                     offset += piModel->EMBEDDING_SIZE;

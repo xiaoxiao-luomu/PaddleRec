@@ -82,7 +82,11 @@ namespace rec
 			}
 			std::vector<CubeValue> values;
 			std::vector<uint64_t> keys;
-			keys.assign(feasigns.begin(), feasigns.end());
+#ifdef TEST_CUBE_CONVERT
+                        keys.push_back(24036492515008080);
+#else
+                        keys.assign(feasigns.begin(), feasigns.end());
+#endif
 			if (feasigns.size() > globalKeys.size()) {
 				LOG(ERROR) << "global keys not enough!";
 			}

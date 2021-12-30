@@ -28,6 +28,11 @@ link_directories("${PADDLE_LIB}/third_party/install/zlib/lib")
 link_directories("${PADDLE_LIB}/third_party/install/leveldb/lib")
 add_definitions(-DBRPC_WITH_GLOG)
 
+OPTION(WITH_CUBE_CONVERT2 "cube file convert method switch" OFF)
+IF(WITH_CUBE_CONVERT2)
+    add_definitions(-DTEST_CUBE_CONVERT) # 启用 cube 功能
+ENDIF(WITH_CUBE_CONVERT2)
+
 OPTION(WITH_CUBE "cube switch" OFF)
 IF(WITH_CUBE)
     add_definitions(-DCUBE) # 启用 cube 功能
