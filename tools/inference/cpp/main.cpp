@@ -222,16 +222,16 @@ void InferMain(int tid, std::vector<Metric>& metrics)
    	            LOG(INFO) << "thread id: " << tid << " batch idx: " << batchSample.batchIdx;
        	    }
             tp->tr->FillLodTensorWithEmbdingIdx(batchSample);
-if (FLAGS_testPredictor) {
-                    tPredictor1 = std::chrono::high_resolution_clock::now();
-                }
-                tp->tr->piModel->predictor->Run();
-                if (FLAGS_testPredictor) {
-                    tPredictor2 = std::chrono::high_resolution_clock::now();
-                    tPredictor += (tPredictor2 - tPredictor1);
-                }
-		tp->tr->GetInferResult(batchSample);
-if (FLAGS_debug) {
+            if (FLAGS_testPredictor) {
+                tPredictor1 = std::chrono::high_resolution_clock::now();
+            }
+            tp->tr->piModel->predictor->Run();
+            if (FLAGS_testPredictor) {
+                tPredictor2 = std::chrono::high_resolution_clock::now();
+                tPredictor += (tPredictor2 - tPredictor1);
+            }
+		    tp->tr->GetInferResult(batchSample);
+            if (FLAGS_debug) {
                 tp->pd->PrintInferResult(tid, batchSample);
                 tp->pd->WriteLayersOutput(tid, batchSample.batchIdx);
                 tp->pd->WriteStdOutput(tid, batchSample);
@@ -257,16 +257,16 @@ if (FLAGS_debug) {
                     break;
                 }
             }
-                            if (FLAGS_testCubeCost) {
+            if (FLAGS_testCubeCost) {
                 tCube1 = std::chrono::high_resolution_clock::now();
             }
             tp->tr->QueryEmbdingVecs(s, queryResult);
-                if (FLAGS_testCubeCost) {
-                    tCube2 = std::chrono::high_resolution_clock::now();
-                    tCube += (tCube2 - tCube1);
-                }
-		for (int i = 0; i < cubeBatchCnt; i++) {
-		//LOG(INFO) << "procssing batch: " << i;
+            if (FLAGS_testCubeCost) {
+                tCube2 = std::chrono::high_resolution_clock::now();
+                tCube += (tCube2 - tCube1);
+            }
+		    for (int i = 0; i < cubeBatchCnt; i++) {
+                //LOG(INFO) << "procssing batch: " << i;
                 tp->tr->FillLodTensorWithEmbdingVec(batches[i], queryResult);
                 if (FLAGS_debug) {
                     tp->pd->PrintLodTensorByBatchIdx(batches[i].batchIdx);

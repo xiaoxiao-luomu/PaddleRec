@@ -43,18 +43,14 @@ public:
         slotIds.clear();
         feasignIds.clear();
         features.erase(features.begin(), features.end());
-        feasigns.erase(feasigns.begin(), feasigns.end());
         featureCnts.erase(featureCnts.begin(), featureCnts.end());
     }
 
     int size()
     {
-        if (features.size() == featureCnts.size())
-        {
+        if (features.size() == featureCnts.size()) {
             return features.size();
-        }
-        else
-        {
+        } else {
             return 0;
         }
     }
@@ -64,7 +60,6 @@ public:
     std::vector<uint32_t> slotIds;
     std::set<uint64_t> feasignIds;
     std::unordered_map<uint32_t, std::vector<std::vector<uint64_t>>> features; // key1: slotId
-    std::unordered_map<uint32_t, std::vector<std::vector<uint64_t>>> feasigns; // key1: slotId
     std::unordered_map<uint32_t, std::vector<uint32_t>> featureCnts;
 
     std::unordered_map<uint64_t, std::vector<float>> queryResult; // key: feasign, value: embdding vector
