@@ -42,3 +42,8 @@
     sh seek.sh
     ```
 
+# 其他
+
+* 如果有新的文件需要配送，在 cube_app2/data/donefile/base.txt 中新增文件路径即可，cube_transfer 会定时扫描
+* 测试时，先确保残余 cube、transfer 进程杀干净
+* 配送时，transfer 默认只拉取 base.txt 中最后一个文件（即最后一行）
